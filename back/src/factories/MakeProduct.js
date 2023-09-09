@@ -1,7 +1,7 @@
 import { ProductsRepository } from "../app/repositories/ProductsRepository.js"
 import { Products } from "../domain/Products.js"
 import { ProductsService } from "../app/services/ProductsService.js"
-import { ProductsController } from "../app/controllers/ProductsController.mjs"
+import { ProductsController } from "../app/controllers/ProductsController.js"
 
 class MakeUpdatePricingProducts{
     static getInstance(){
