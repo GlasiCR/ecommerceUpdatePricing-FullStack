@@ -14,7 +14,6 @@ const tableFileCsv = [
 export default function UpdatePricing() {
   const [tableUploadToUpdate, setTableUploadToUpdate] = useState<Array<TypeUploadTablePrice>>([])
   const [isAllValid, setIsAllValid] = useState(false)
-  //const [allListProductDb, setAllListProductDb] = useState<Array<TypeUploadTablePrice>>([])
   
   async function updatePrices (){
     return await UpdatePriceProducts(tableUploadToUpdate)
