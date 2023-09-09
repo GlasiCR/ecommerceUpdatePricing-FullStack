@@ -42,7 +42,7 @@ Este projeto consiste em uma ferramenta de atualização de preços para empresa
 
 Obs.: Não há variável de ambiente configurada. 
 Antes de iniciar o projeto necessário inserir no arquivo DatabaseConfig.js as informações para acesso ao MySQL: host, user, password e database.
-Arquivo disponível na rota back\api\src\databaseConfig
+Arquivo disponível na rota back\src\databaseConfig
 
 ### Funcionalidades da Ferramenta
 •	Carregamento do arquivo de precificação;
