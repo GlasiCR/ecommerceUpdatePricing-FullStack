@@ -1,4 +1,5 @@
 import { parse } from 'csv-parse';
+import { ValidationUpdatePrice } from "../../utils/ValidationUpdatePrice.js"
 
 class ProductsController {
     constructor(service) {
