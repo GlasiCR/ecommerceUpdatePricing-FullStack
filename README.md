@@ -1,6 +1,5 @@
 # Ecommerce Update Pricing - FullStack
 
-# Nome do Projeto
 Este projeto consiste em uma ferramenta de atualização de preços para empresas de e-commerce. Ela permite aos usuários realizar atualizações a partir de um do upload de um arquivo .csv.
 
 ## Índice
@@ -12,7 +11,7 @@ Este projeto consiste em uma ferramenta de atualização de preços para empresa
 
 •	Sobre o arquivo .csv
 
-•	Pendências
+•	Pendências/Issues
 
 
 ### Instalação e dependências
@@ -70,7 +69,7 @@ code	name	new_price
 16	AZEITE  PORTUGUES  EXTRA VIRGEM GALLO 500ML	20.49
 18	BEBIDA ENERGÉTICA VIBE 2L	8.99
 
-### Pendências
+### Pendências/Issues
 Explique como outros desenvolvedores podem contribuir para o projeto. Inclua informações sobre como abrir problemas (issues) e enviar pull requests.
 •	Aplicação não está atualizando o valor do produto quando o mesmo faz parte de um pack;
 
