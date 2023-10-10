@@ -12,7 +12,7 @@ class Database {
         mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: "123456",
+            password: ,
             database: "dbPricingUpdate",
         })
     }
