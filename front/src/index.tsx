@@ -6,63 +6,82 @@ import { color } from "./theme/constants";
 import { TypeUploadTablePrice } from "./type/TypeUploadTablePrice";
 import { AllProductsDb } from "./services/AllProductsDb";
 import { UpdatePriceProducts } from "./services/UpdatePriceProducts";
+import Papa from "papaparse"
 
-const tableFileCsv = [
-    { code: 1000, name: "BEBIDA ENERGÉTICA VIBE 2L - 6 UNIDADES", new_price: 54 },
-  ];
 
 export default function UpdatePricing() {
   const [tableUploadToUpdate, setTableUploadToUpdate] = useState<Array<TypeUploadTablePrice>>([])
   const [isAllValid, setIsAllValid] = useState(false)
-  
-  async function updatePrices (){
+  const [tableFileCsv, setTableFileCsv] = useState<Array<TypeUploadTablePrice>>([])
+
+  async function updatePrices() {
     return await UpdatePriceProducts(tableUploadToUpdate)
   }
 
-  async function validatePrices (){
-    const dataDb = await AllProductsDb();
-    const updatedTable = dataDb.map((dbProduct) => {
-    const matchingProduct = tableFileCsv.find((item) => item.code === dbProduct.code);
-    if (matchingProduct) {
-      const { code, name, new_price } = matchingProduct
-      const { sales_price, cost_price } = dbProduct
-
-      const validation = validationNewPrice(cost_price, sales_price, new_price);
-
-      return { code, name, new_price, cost_price, sales_price, validation };
+  async function validatePrices() {
+    const transformArray = Array.from(tableFileCsv)
+    console.log(transformArray, 27)
+    if (!tableFileCsv || !tableFileCsv[0]) {
+      console.error("Nenhum arquivo selecionado");
+      return;
     }
-    return null;
-  });
+    const dataDb = await AllProductsDb();
 
-  const updatedTableFiltered = updatedTable.filter(Boolean); // Remove os elementos nulos
+    const updatedTable = dataDb.map((dbProduct) => {
+      const matchingProduct = transformArray.find((item) => item.code === dbProduct.code);
+      if (matchingProduct) {
+        const { code, name, new_price } = matchingProduct
+        const { sales_price, cost_price } = dbProduct
 
-  setTableUploadToUpdate(updatedTableFiltered);
+        const validation = validationNewPrice(cost_price, sales_price, new_price as number);
+        return { code, name, new_price, cost_price, sales_price, validation };
+      }
+      return null;
+    });
 
-  const enableButton = updatedTableFiltered.every(
-    (item) => item.validation === "Validação concluída com sucesso!"
-    )
+    const updatedTableFiltered = updatedTable.filter(Boolean);
 
-  setIsAllValid(enableButton);
+    setTableUploadToUpdate(updatedTableFiltered);
+
+    const enableButton = updatedTableFiltered.every(
+      (item) => item.validation === "Validação concluída com sucesso!"
+    );
+
+    setIsAllValid(enableButton);
   }
-  
-  function validationNewPrice(cost: number, currenty: number, newPrice: number){
-            const validPercentage = 10
-            const maxPrice = currenty + ((currenty * validPercentage)/100)
-            const minPrice = currenty - (currenty * (validPercentage / 100))
-    
-            if(newPrice < cost){
-                return `Cuidado com prejuízo! Registre um preço maior que o custo do produto, R$ ${cost}`
-            }
-            if(newPrice < minPrice){
-                return`Cuidado com prejuízo! Informe um preço a partir de R$ ${minPrice}`
-            }
-            if(newPrice > maxPrice){
-                return `Opa! O preço aumentou mais do que o esperado. Informe um valor até R$ ${maxPrice}` 
-            }
-            if(newPrice > cost){     
-                return "Validação concluída com sucesso!"
-            } 
+
+  const lerDadosArquivos = (event: any) => {
+    const arquivo = event.target.files[0]
+    if(arquivo){
+      Papa.parse(arquivo, {
+        header: true,
+        dynamicTyping: true,
+        complete: (result) => {
+          const listProducts = result.data
+          setTableFileCsv(listProducts as any)
         }
+      })
+    }
+  }
+
+  function validationNewPrice(cost: number, currenty: number, newPrice: number) {
+    const validPercentage = 10
+    const maxPrice = currenty + ((currenty * validPercentage) / 100)
+    const minPrice = currenty - (currenty * (validPercentage / 100))
+    console.log("chamei a função")
+    if (newPrice < cost) {
+      return `Cuidado com prejuízo! Registre um preço maior que o custo do produto, R$ ${cost}`
+    }
+    if (newPrice < minPrice) {
+      return `Cuidado com prejuízo! Informe um preço a partir de R$ ${minPrice}`
+    }
+    if (newPrice > maxPrice) {
+      return `Opa! O preço aumentou mais do que o esperado. Informe um valor até R$ ${maxPrice}`
+    }
+    if (newPrice > cost) {
+      return "Validação concluída com sucesso!"
+    }
+  }
 
   return (
     <>
@@ -72,12 +91,13 @@ export default function UpdatePricing() {
           borderButton={`2px solid ${color.secondary}`}
           onClick={validatePrices}
           titleButton="Validar"
-          
+          input={<input type="file" accept=".csv" onChange={lerDadosArquivos} />  
+        }
         />
-        <Button 
-        onClick={updatePrices} 
-        titleButton="Atualizar" 
-        disabled= {!isAllValid}/>
+        <Button
+          onClick={updatePrices}
+          titleButton="Atualizar"
+          disabled={!isAllValid} />
       </Header>
       <Table header={["Código", "Produto", "Custo do Produto", "Preço Atual", " Novo Preço", "Validação"]}>
         {tableUploadToUpdate.map((item) => (
@@ -87,7 +107,7 @@ export default function UpdatePricing() {
             <td>R$ {item.cost_price} </td>
             <td>R$ {item.sales_price}</td>
             <td>R$ {item.new_price}</td>
-            <td>{item.validation}</td>
+            <td>R$ {item.validation}</td>
           </tr>
         ))}
       </Table>
