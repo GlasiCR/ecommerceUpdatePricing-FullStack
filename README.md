@@ -1,22 +1,27 @@
-# Ecommerce Update Pricing - FullStack
+## Ecommerce Update Pricing - FullStack
+<div style="display: flex;"> <br>
+<img align="center", src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img align="center", src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"> 
+<img align="center", src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
+<img align="center", src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white"> 
+<img align="center", src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white">
+<img align="center", src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge">
 
-Este projeto consiste em uma ferramenta de atualização de preços para empresas de e-commerce. Ela permite aos usuários realizar atualizações a partir de um do upload de um arquivo .csv.
+<br>
+<br>
+</div>
 
-## Índice
-•	Instalação e dependências
+### Descrição:
+Desenvolvi uma interface na qual empresas cadastradas no e-commerce podem carregar um arquivo .CSV* com informações do produto que deseja atualizar o preço de venda, bem como este novo preço.
+Com base no upload deste arquivo, somada a informações consumidas da API, também desenvolvida por mim, uma tabela é preenchida com as devidas informações e validações, se o preço atual atende as regras de negócio ou não.
+Estando tudo OK, o comerciante consegue atualizar o preço do produto e esta nova informação é persistida no banco de dados.
 
-•	Funcionalidades da Ferramenta
-
-•	Tecnologias Utilizadas
-
-•	Sobre o arquivo .csv
-
-•	Pendências/Issues
-
-
-### Instalação e dependências
+### Instalação e dependências:
 ##### Fron-end
+
+##### Para começar: 
 ###### npm run dev
+
 •	React.js: npm create vite (com Typyscript);
 
 •	Style-Components: npm install styled-components;
@@ -24,7 +29,10 @@ Este projeto consiste em uma ferramenta de atualização de preços para empresa
 •	Type Style-Components:  npm install --save-dev @types/styled-components;
 
 ##### Back-end
+
+##### Para começar: 
 ###### npm run start
+
 •	Node.js inicializar projeto: npm init -y;
 
 •	MySQL: npm install mysql;
@@ -43,8 +51,9 @@ Obs.: Não há variável de ambiente configurada.
 Antes de iniciar o projeto necessário inserir no arquivo DatabaseConfig.js as informações para acesso ao MySQL: host, user, password e database.
 Arquivo disponível na rota back\src\databaseConfig
 
-### Funcionalidades da Ferramenta
-•	Carregamento do arquivo de precificação;
+### Funcionalidades da Ferramenta:
+
+•	Carrega do arquivo .csv com a nova precificação;
 
 •	Validação de campos, códigos de produtos e preços;
 
@@ -56,22 +65,5 @@ Arquivo disponível na rota back\src\databaseConfig
 
 •	Atualização de preços no banco de dados.
 
-Tecnologias Utilizadas
-•	Backend em Node.js com o framework Express para implementar a lógica de negócios e criar um servidor web que interage com o banco de dados MySQL;
-
-•	Frontend em React.js para facilitar a interação do usuário com a ferramenta, proporcionando uma interface de usuário amigável e responsiva;
-
-•	Banco de dados MySQL (versão 5 ou 8) para armazenar informações detalhadas sobre produtos e preços, garantindo um gerenciamento eficiente dos dados;
-
-### Sobre o arquivo .csv
-O arquivo deve seguir este formato:
-code	name	new_price
-16	AZEITE  PORTUGUES  EXTRA VIRGEM GALLO 500ML	20.49
-18	BEBIDA ENERGÉTICA VIBE 2L	8.99
-
-### Pendências/Issues
-Explique como outros desenvolvedores podem contribuir para o projeto. Inclua informações sobre como abrir problemas (issues) e enviar pull requests.
-•	Aplicação não está atualizando o valor do produto quando o mesmo faz parte de um pack;
-
-•	Embora a rota do back-end para upload de arquivo esteja funcionando (validado no Postman) a requisição do front-end não está tendo sucesso.
-Para navegação é possível "mocar" dados em um array disponibilizado no arquivo index.tsx, rota: front\src
+### Contribuições:
+Ficarei muito feliz caso queira contribuir com o projeto e desde já agradeço =) Clone este repositório, crie seu branch de trabalho e bora lá! Ao final, abra um Pull Request explicando o problema resolvido ou recurso realizado. Contato: https://www.linkedin.com/in/glasielle-cirilo-dev-fullstack/
